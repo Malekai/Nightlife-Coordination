@@ -13,8 +13,7 @@ var express = require("express"),
 //Requiring routes
 var rsvpRoutes = require("./routes/rsvp"),
     yelpRoutes = require("./routes/yelp"),
-    indexRoutes = require("./routes/index"),
-    configAuth = require("./config/auth")
+    indexRoutes = require("./routes/index")
 
 var url = process.env.DATABASEURL || "mongodb://localhost/nightlifeapp"
 mongoose.connect(url);
