@@ -18,7 +18,8 @@ var rsvpRoutes = require("./routes/rsvp"),
     indexRoutes = require("./routes/index"),
     configAuth = require("./config/auth")
 
-mongoose.connect("mongodb://localhost/nightlifeapp");
+var url = process.env.DATABASEURL || "mongodb://localhost/nightlifeapp"
+mongoose.connect(url);
 
 //CONFIGS
 app.use(bodyParser.urlencoded({
