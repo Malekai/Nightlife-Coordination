@@ -1,0 +1,17 @@
+<% include partials/header %>
+<% include partials/search %>
+
+<% if (currentUser && currentUser.rsvp.length > 0) { %>
+<div id="RSVP">
+  <h4>Your RSVPs :</h4>
+  <br>
+  <% currentUser.rsvp.forEach(function(item){ %>
+    <span>
+    <a target="_blank" href="https://www.yelp.com/biz/<%= item.split(":")[0] %>"><%= item.split(":").pop() %></a>
+    <form action="/rsvp/<%= item.split(":")[0] %>/<%= item.split(":").pop() %>?_method=DELETE" method="POST"><button><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></button></form>
+    </span>
+  <% }) %>
+</div>
+<% } %>
+
+<% include partials/footer %>

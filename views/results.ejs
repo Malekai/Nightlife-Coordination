@@ -1,0 +1,49 @@
+<% include partials/header %>
+<% include partials/search %>
+
+<div class="results">
+<div class="container">
+  <% if (currentUser && currentUser.rsvp.length > 0) { %>
+  <div id="RSVP">
+    <h4>Your RSVPs :</h4>
+    <br>
+    <% currentUser.rsvp.forEach(function(item){ %>
+      <span>
+      <a target="_blank" href="https://www.yelp.com/biz/<%= item.split(":")[0] %>"><%= item.split(":").pop() %></a>
+      <form action="/rsvp/<%= item.split(":")[0] %>/<%= item.split(":").pop() %>?_method=DELETE" method="POST"><button><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></button></form>
+      </span>
+    <% }) %>
+  </div>
+  <% } %>
+  <div class="row">
+  <% spots.forEach(function(spot){ %>
+  <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><a target="_blank" href="<%= spot.mobile_url %>"><%= spot.name %></a>  <img src="<%= spot.rating_img_url %>"></h3>
+      </div>
+        <div class="panel-body">
+        <img src="<%= spot.image_url %>" alt="Bar thumbnail">
+            <p><%= spot.snippet_text %></p>
+            <% if (currentUser) { %>
+              <% if (currentUser.rsvp.indexOf(spot.id + ":" + spot.name) !== -1) { %>
+                <form action="/rsvp/<%= spot.id %>/<%= spot.name %>?_method=DELETE" method="POST">
+                  <button class="btn btn-xs btn-warning">Un-RSVP</button>
+                </form>
+              <% } else { %>
+              <form action="/rsvp/<%= spot.id %>/<%= spot.name %>?_method=PUT" method="POST">
+                <button class="btn btn-xs btn-success">RSVP</button>
+              </form>
+              <% } %>
+            <% } else { %>
+              <a href="/login">Login to RSVP</a>
+            <% } %>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+</div>
+</div>
+
+<% include partials/footer %>

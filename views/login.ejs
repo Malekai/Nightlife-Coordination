@@ -1,0 +1,21 @@
+<% include partials/header %>
+
+<div class="logreg">
+<form action="/login" method="POST"/>
+  <h4 class="glyphicon glyphicon-log-in" aria-hidden="true"> </h4>
+  <h4>Login</h4>
+  <br>
+  <br>
+  <input type="text" name="username" placeholder=" username">
+  <br>
+  <br>
+  <input type="password" name="password" placeholder=" password">
+  <br>
+  <br>
+  <button class="btn btn-default">Login</button>
+</form>
+<br>
+<p>Don't have an account? <a href="/register">Register</a></p>
+</div>
+
+<% include partials/footer %>

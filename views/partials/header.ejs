@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nightlife Coordination</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
+    <link rel="stylesheet" href="/stylesheets/main.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <% if (!currentUser) { %>
+              <a class="navSub" href="/">Home</a>
+              <a class="navSub" href="/register">Register</a>
+              <a class="navSub" href="/login">Login</a>
+            <% } else { %>
+              <a class="navSub" id="greeting" href="/">Hello <%= currentUser.username %></a>
+              <a class="navSub" href="/logout">Logout</a>
+            <% } %>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-nav-demo">
+          <ul class="nav navbar-nav navbar-right">
+            <% if (!currentUser) { %>
+              <li><a class="navSub" href="/">Home</a></li>
+              <li><a class="navSub" href="/register">Register</a></li>
+              <li><a class="navSub" href="/login">Login</a></li>
+            <% } else { %>
+              <li><a class="navSub" id="greeting" href="/">Hello <%= currentUser.username %></a></li>
+              <li><a class="navSub" href="/logout">Logout</a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
