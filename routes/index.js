@@ -3,7 +3,6 @@ var router = express.Router();
 var User = require("../models/user");
 var passport = require("passport");
 var middleware = require("../middleware");
-var GitHubStrategy = require('passport-github2').Strategy;
 
 router.get("/", function(req, res){
   res.render("home", {currentUser: req.user});
@@ -40,15 +39,5 @@ router.get("/logout", middleware.isLoggedIn, function(req, res){
   req.logout();
   res.redirect("/");
 });
-
-router.get('/login/facebook',
-  passport.authenticate('facebook'));
-
-router.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
 
 module.exports = router;

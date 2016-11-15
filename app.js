@@ -9,8 +9,6 @@ var express = require("express"),
     LocalStrategy = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose"),
     methodOverride = require("method-override"),
-    GitHubStrategy = require('passport-github2').Strategy,
-    FacebookStrategy = require('passport-facebook').Strategy
 
 //Requiring routes
 var rsvpRoutes = require("./routes/rsvp"),
@@ -49,23 +47,6 @@ app.use(function(req, res, next){
   res.locals.success = req.flash("success");
   next();
 });
-
-// passport.use(new FacebookStrategy({
-//   // pull in our app id and secret from our auth.js file
-//   clientID        : configAuth.facebookAuth.clientID,
-//   clientSecret    : configAuth.facebookAuth.clientSecret,
-//   callbackURL     : configAuth.facebookAuth.callbackURL
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     // In this example, the user's Facebook profile is supplied as the user
-//     // record.  In a production-quality application, the Facebook profile should
-//     // be associated with a user record in the application's database, which
-//     // allows for account linking and authentication with other identity
-//     // providers.
-//     console.log(profile);
-//     return cb(null, profile);
-//   }));
-
 
 app.use(indexRoutes);
 app.use(yelpRoutes);
