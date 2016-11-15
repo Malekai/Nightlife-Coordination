@@ -8,7 +8,7 @@ var express = require("express"),
     Yelp = require("yelp"),
     LocalStrategy = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose"),
-    methodOverride = require("method-override"),
+    methodOverride = require("method-override")
 
 //Requiring routes
 var rsvpRoutes = require("./routes/rsvp"),
