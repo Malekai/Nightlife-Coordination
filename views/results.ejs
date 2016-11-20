@@ -19,7 +19,7 @@
   <% spots.forEach(function(spot){ %>
   <div class="col-lg-3 col-md-4 col-sm-6">
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div id="<%= spot.id %>" class="panel-heading">
         <h3 class="panel-title"><a target="_blank" href="<%= spot.mobile_url %>"><%= spot.name %></a>  <img src="<%= spot.rating_img_url %>"></h3>
       </div>
         <div class="panel-body">
@@ -27,11 +27,11 @@
             <p><%= spot.snippet_text %></p>
             <% if (currentUser) { %>
               <% if (currentUser.rsvp.indexOf(spot.id + ":" + spot.name) !== -1) { %>
-                <form action="/rsvp/<%= spot.id %>/<%= spot.name %>?_method=DELETE" method="POST">
+                <form action="/rsvp/<%= spot.id %>/<%= spot.name %>/<%= search %>?_method=DELETE" method="POST">
                   <button class="btn btn-xs btn-warning">Un-RSVP</button>
                 </form>
               <% } else { %>
-              <form action="/rsvp/<%= spot.id %>/<%= spot.name %>?_method=PUT" method="POST">
+              <form action="/rsvp/<%= spot.id %>/<%= spot.name %>/<%= search %>?_method=PUT" method="POST">
                 <button class="btn btn-xs btn-success">RSVP</button>
               </form>
               <% } %>

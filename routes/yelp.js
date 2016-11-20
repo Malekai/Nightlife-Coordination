@@ -12,8 +12,7 @@ var yelp = new Yelp({
   token_secret: '-0XocD-njFKj-qo1xZQPPTft6m4',
 });
 
-router.get("/results/search/:id", function(req, res){
-  req.params.id = req.query.search;
+router.get("/results", function(req, res){
   if (!req.query.search) {
     res.redirect("/");
   } else {
@@ -24,7 +23,7 @@ router.get("/results/search/:id", function(req, res){
       } else {
         var jsonString = JSON.stringify(data);
         var parsedData = JSON.parse(jsonString).businesses;
-        res.render("results", {spots: parsedData, currentUser: req.user});
+        res.render("results", {spots: parsedData, currentUser: req.user, search: query});
       }
     });
   }

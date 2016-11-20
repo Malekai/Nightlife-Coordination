@@ -5,7 +5,8 @@ var passport = require("passport");
 var middleware = require("../middleware");
 
 //UPDATE
-router.put("/rsvp/:id/:name", middleware.isLoggedIn, function(req, res){
+router.put("/rsvp/:id/:name/:search", middleware.isLoggedIn, function(req, res){
+  var search = req.params.search;
   var id = req.params.id;
   var name = req.params.name
   User.findByIdAndUpdate(req.user.id, id, function(err){
@@ -14,7 +15,7 @@ router.put("/rsvp/:id/:name", middleware.isLoggedIn, function(req, res){
     } else {
       req.user.rsvp.push(id + ":" + name);
       req.user.save();
-      res.redirect("back");
+      res.redirect("/results?search=" + search + "#" + id);
     }
   })
 });
@@ -32,6 +33,24 @@ router.delete("/rsvp/:id/:name", middleware.isLoggedIn, function(req, res){
       req.user.rsvp.splice(position, 1);
       req.user.save();
       res.redirect("back");
+    }
+  })
+});
+
+//DESTROY UN-RSVP
+router.delete("/rsvp/:id/:name/:search", middleware.isLoggedIn, function(req, res){
+  var search = req.params.search;
+  var id = req.params.id;
+  var name = req.params.name;
+  var nameId = id + ":" + name;
+  var position = req.user.rsvp.indexOf(nameId);
+  User.findByIdAndRemove(req.user.rsvp[id], function(err){
+    if (err) {
+      res.redirect('back');
+    } else {
+      req.user.rsvp.splice(position, 1);
+      req.user.save();
+      res.redirect("/results?search=" + search + "#" + id);
     }
   })
 });
